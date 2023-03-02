@@ -1,4 +1,15 @@
 {
+  "name": "m4-t14-kimoveis-srod-douglas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Kenzie-Academy-Brasil-Developers/m4-t14-kimoveis-srod-douglas.git",
+  "author": "srod-douglas <srod.douglas@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "dev": "ts-node-dev --ignore-watch node_modules --cls --rs src/server.ts",
+    "typeorm": "typeorm-ts-node-commonjs"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
@@ -7,7 +18,7 @@
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.9.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.10",
+    "typeorm": "^0.3.11",
     "zod": "^3.20.6"
   },
   "devDependencies": {
@@ -24,15 +35,5 @@
     "ts-jest": "^28.0.8",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.9.5"
-  },
-  "name": "m4-t14-kimoveis-srod-douglas",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:Kenzie-Academy-Brasil-Developers/m4-t14-kimoveis-srod-douglas.git",
-  "author": "srod-douglas <srod.douglas@gmail.com>",
-  "license": "MIT",
-  "scripts": {
-    "dev": "ts-node-dev --ignore-watch node_modules --cls --rs src/server.ts",
-    "typeorm": "typeorm-ts-node-commonjs"
   }
 }
