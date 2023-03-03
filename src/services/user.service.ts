@@ -1,6 +1,7 @@
 import { Repository } from 'typeorm'
 import { AppDataSource } from '../data-source'
 import { User } from '../entities'
+import { AppError } from '../errors';
 import { tCreateUser } from '../interfaces';
 import { tListUserReturn, tUpdateUser, tUserReturn } from '../interfaces/user.interfaces';
 import { listUserReturnSchema, userReturnSchema } from '../schemas';
@@ -44,4 +45,31 @@ const update = async (dataUser: tUpdateUser, idUser: number): Promise<tUserRetur
     return updatedUser
 } 
 
-export default { create, list, update }
+const softDel = async (idToDel: number): Promise<void> => {
+
+    const userRepo: Repository<User> = AppDataSource.getRepository(User)
+
+    const findUser = await userRepo.findOneBy({
+        id: idToDel
+    })
+
+    if(findUser?.deletedAt){
+        throw new AppError('User not found', 404)
+    }
+
+    const deletedUser = {
+        ...findUser,
+        deletedAt: String(new Date())
+    }
+
+    const updatedUser = userReturnSchema.parse(await userRepo.save(deletedUser)) 
+
+    return
+
+
+/*     const updatedUser = userReturnSchema.parse(await userRepo.save(newUser))  */
+
+
+} 
+
+export default { create, list, update, softDel }

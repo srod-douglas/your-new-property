@@ -1,7 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import { Repository } from 'typeorm';
-import { AppDataSource } from '../data-source';
-import { User } from '../entities';
 import { AppError } from '../errors';
 
 const middleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -13,12 +10,10 @@ const middleware = async (req: Request, res: Response, next: NextFunction): Prom
         if(idUserUpdate !== Number(req.user.id) && !req.user.admin){
 
             throw new AppError('Insufficient permission', 403)
+            
         }else{
             return next()
-
         }
-
-/*         throw new AppError('Insufficient permission', 403) */
     }
 
     if(!req.user.admin){

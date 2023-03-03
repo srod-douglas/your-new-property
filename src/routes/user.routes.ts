@@ -8,6 +8,6 @@ const userRouter: Router = Router()
 userRouter.post('', ensureData.middleware(createUserSchema), ensureEmail.middleware, userController.create)
 userRouter.get('', ensureToken.middleware, ensureAdmin.middleware, userController.list)
 userRouter.patch('/:id', ensureId.middleware, ensureToken.middleware, ensureAdmin.middleware, ensureData.middleware(updateUserSchema), userController.update)
-userRouter.delete('/:id')
+userRouter.delete('/:id', ensureId.middleware, ensureToken.middleware, ensureAdmin.middleware, ensureData.middleware(updateUserSchema), userController.softDel)
 
 export default userRouter

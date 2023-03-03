@@ -28,4 +28,15 @@ const update = async (req: Request, res: Response): Promise<Response> => {
 
 }
 
-export default { create, list, update }
+const softDel = async (req: Request, res: Response): Promise<Response> => {
+
+
+    const idToDelete: number = Number(req.params.id)
+
+    await userServices.softDel(idToDelete)
+    
+    return res.status(204).send()
+
+}
+
+export default { create, list, update, softDel }
