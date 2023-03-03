@@ -30,7 +30,6 @@ const update = async (req: Request, res: Response): Promise<Response> => {
 
 const softDel = async (req: Request, res: Response): Promise<Response> => {
 
-
     const idToDelete: number = Number(req.params.id)
 
     await userServices.softDel(idToDelete)

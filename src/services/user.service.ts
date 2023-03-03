@@ -22,6 +22,7 @@ const list = async (): Promise<tListUserReturn> => {
 
     const userRepo: Repository<User> = AppDataSource.getRepository(User)
     const users = await userRepo.find()
+    
     const usersReturn = listUserReturnSchema.parse(users)
     return usersReturn
 
@@ -62,14 +63,9 @@ const softDel = async (idToDel: number): Promise<void> => {
         deletedAt: String(new Date())
     }
 
-    const updatedUser = userReturnSchema.parse(await userRepo.save(deletedUser)) 
+    userReturnSchema.parse(await userRepo.save(deletedUser)) 
 
     return
-
-
-/*     const updatedUser = userReturnSchema.parse(await userRepo.save(newUser))  */
-
-
 } 
 
 export default { create, list, update, softDel }
