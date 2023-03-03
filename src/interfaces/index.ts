@@ -1,6 +1,7 @@
 import { tCreateUser, tCreatedUser, tUserReturn, iReqUser } from './user.interfaces';
-import { tLogin } from './login.interfaces'
-import { tCreateCategory, tReturnCategory } from './category.interfaces'
+import { tLogin } from './login.interfaces';
+import { tCreateCategory, tReturnCategory } from './category.interfaces';
+import { tCreateRealEstate, tReturnRealEstate } from './realEstate.interface'
 
 export {
     tCreateUser,
@@ -9,5 +10,7 @@ export {
     tLogin,
     iReqUser,
     tCreateCategory,
-    tReturnCategory
+    tReturnCategory,
+    tCreateRealEstate,
+    tReturnRealEstate
 }

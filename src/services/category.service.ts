@@ -25,4 +25,28 @@ const create = async (newCategory: tCreateCategory): Promise<tReturnCategory> =>
 
 } 
 
-export default { create }
+const list = async (): Promise<Category[]> => {
+
+    const categoryRepo: Repository<Category> = AppDataSource.getRepository(Category)
+    const listCategories: Category[] = await categoryRepo.find()
+
+    return listCategories
+}
+
+const listRealEstateFromId = async (idCategory: number): Promise<Category | null> => {
+    
+    const categoryRepo: Repository<Category> = AppDataSource.getRepository(Category)
+
+    const findCategory: Category | null = await categoryRepo.findOne({
+        relations:{
+            realEstate: true
+        },
+        where:{
+            id: idCategory
+        }
+    })
+
+    return findCategory
+}
+
+export default { create, list, listRealEstateFromId }

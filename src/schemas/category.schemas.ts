@@ -7,3 +7,5 @@ export const categorySchema = z.object({
 export const returnCategorySchema = categorySchema.extend({
     id: z.number()
 })
+
+export const returnRealEstatesList = returnCategorySchema.array()
