@@ -16,7 +16,7 @@ export class User {
     @Column({ type: 'boolean', default: false })
     admin: boolean
 
-    @Column({ type: 'varchar', length: 120 })
+    @Column({ length: 120 })
     password: string
 
     @CreateDateColumn({ type: 'date' })
@@ -31,12 +31,9 @@ export class User {
     @BeforeInsert()
     @BeforeUpdate()
     hashPassword(){
-        const wasEncrypted = getRounds(this.password)
-
-        if(!wasEncrypted){
-
+        const isEncrypted: number = getRounds(this.password)
+        if(!isEncrypted){
             this.password = hashSync(this.password, 10)
-
         }
     }
 }

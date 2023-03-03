@@ -3,11 +3,11 @@ import { Repository } from 'typeorm';
 import { AppDataSource } from '../data-source';
 import { User } from '../entities';
 import { AppError } from '../errors';
-import { tLogin } from '../interfaces';
+import { iReqUser, tLogin } from '../interfaces';
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
 
-const create = async (dataLogin: tLogin) => {
+const create = async (dataLogin: tLogin, reqUser: iReqUser) => {
 
     const userRepo: Repository<User> = AppDataSource.getRepository(User)
 
@@ -36,6 +36,11 @@ const create = async (dataLogin: tLogin) => {
             subject: String(user.id)
         }
     )
+
+    reqUser = {
+        id: user.id,
+        admin: user.admin
+    }
     return token
 }
 

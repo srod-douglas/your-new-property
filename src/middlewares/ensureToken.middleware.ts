@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../errors';
-import 'dotenv/config';
 import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 const middleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 
     const checkToken = req.headers.authorization
 
     if(!checkToken){
-        throw new AppError('Token is missing!', 401)
+        throw new AppError('Missing bearer token', 401)
     }
 
     const token = checkToken.split(' ')[1]

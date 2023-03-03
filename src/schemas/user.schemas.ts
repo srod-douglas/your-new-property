@@ -18,5 +18,7 @@ export const createdUserSchema = createUserSchema.extend({
 
 })
 
+export const updateUserSchema = createUserSchema.omit({ admin: true }).partial()
+
 export const userReturnSchema = createdUserSchema.omit({ password: true })
 export const listUserReturnSchema = userReturnSchema.array()

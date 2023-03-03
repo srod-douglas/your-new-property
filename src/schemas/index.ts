@@ -1,4 +1,4 @@
-import { createUserSchema, createdUserSchema, userReturnSchema, listUserReturnSchema } from './user.schemas'
+import { createUserSchema, createdUserSchema, userReturnSchema, listUserReturnSchema, updateUserSchema } from './user.schemas'
 import { loginSchema } from './login.schemas'
 
 export  {
@@ -6,5 +6,6 @@ export  {
     createdUserSchema,
     userReturnSchema,
     loginSchema,
-    listUserReturnSchema
+    listUserReturnSchema,
+    updateUserSchema
 }

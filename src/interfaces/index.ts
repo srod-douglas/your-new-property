@@ -1,8 +1,10 @@
-import { createUser, createdUser } from './user.interfaces';
+import { tCreateUser, tCreatedUser, tUserReturn, iReqUser } from './user.interfaces';
 import { tLogin } from './login.interfaces'
 
 export {
-    createUser,
-    createdUser,
-    tLogin
+    tCreateUser,
+    tCreatedUser,
+    tUserReturn,
+    tLogin,
+    iReqUser
 }
