@@ -3,7 +3,7 @@ import { AppDataSource } from '../data-source'
 import { User } from '../entities'
 import { AppError } from '../errors';
 import { tCreateUser } from '../interfaces';
-import { tListUserReturn, tUpdateUser, tUserReturn } from '../interfaces/user.interfaces';
+import { tListUserReturn, tUpdateUser, tUserReturn } from '../interfaces';
 import { listUserReturnSchema, userReturnSchema } from '../schemas';
 
 const create = async (dataUser: tCreateUser): Promise<tUserReturn> => {
@@ -12,7 +12,7 @@ const create = async (dataUser: tCreateUser): Promise<tUserReturn> => {
     const user: User = userRepo.create(dataUser)
     await userRepo.save(user)
 
-    const newUser = userReturnSchema.parse(user)
+    const newUser: tUserReturn = userReturnSchema.parse(user)
 
     return newUser
 
@@ -21,9 +21,9 @@ const create = async (dataUser: tCreateUser): Promise<tUserReturn> => {
 const list = async (): Promise<tListUserReturn> => {
 
     const userRepo: Repository<User> = AppDataSource.getRepository(User)
-    const users = await userRepo.find()
+    const users: User[] = await userRepo.find()
     
-    const usersReturn = listUserReturnSchema.parse(users)
+    const usersReturn: tListUserReturn = listUserReturnSchema.parse(users)
     return usersReturn
 
 } 
@@ -32,16 +32,16 @@ const update = async (dataUser: tUpdateUser, idUser: number): Promise<tUserRetur
 
     const userRepo: Repository<User> = AppDataSource.getRepository(User)
 
-    const findUser = await userRepo.findOneBy({
+    const findUser: User | null = await userRepo.findOneBy({
         id: idUser
     })
 
-    const newUser = userRepo.create({
+    const newUser: User = userRepo.create({
         ...findUser,
         ...dataUser
     })
 
-    const updatedUser = userReturnSchema.parse(await userRepo.save(newUser)) 
+    const updatedUser: tUserReturn = userReturnSchema.parse(await userRepo.save(newUser)) 
 
     return updatedUser
 } 
@@ -50,7 +50,7 @@ const softDel = async (idToDel: number): Promise<void> => {
 
     const userRepo: Repository<User> = AppDataSource.getRepository(User)
 
-    const findUser = await userRepo.findOneBy({
+    const findUser: User | null = await userRepo.findOneBy({
         id: idToDel
     })
 

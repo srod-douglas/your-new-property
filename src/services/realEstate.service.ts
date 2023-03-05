@@ -1,9 +1,9 @@
-import { Repository } from 'typeorm'
-import { AppDataSource } from '../data-source'
-import { Address, Category, RealEstate } from '../entities'
-import { AppError } from '../errors'
-import { tCreateRealEstate } from '../interfaces'
-import { returnRealEstateSchema } from '../schemas/realEstate.schemas'
+import { Repository } from 'typeorm';
+import { AppDataSource } from '../data-source';
+import { Address, Category, RealEstate } from '../entities';
+import { AppError } from '../errors';
+import { tCreateRealEstate } from '../interfaces';
+import { returnRealEstateSchema } from '../schemas';
 
 const create = async (dataRealEstate: tCreateRealEstate): Promise<RealEstate> => {
 
@@ -11,14 +11,14 @@ const create = async (dataRealEstate: tCreateRealEstate): Promise<RealEstate> =>
     const realEstateRepo: Repository<RealEstate> = AppDataSource.getRepository(RealEstate)
     const categoryRepo: Repository<Category> = AppDataSource.getRepository(Category)
 
-    const findAddress = await addressRepo.findOneBy({
+    const findAddress: Address | null = await addressRepo.findOneBy({
         street: dataRealEstate.address.street,
         city: dataRealEstate.address.city,
         state: dataRealEstate.address.state,
         zipCode: dataRealEstate.address.zipCode
     })
     
-    const findCategory = await categoryRepo.findOneBy({
+    const findCategory: Category | null = await categoryRepo.findOneBy({
         id: +dataRealEstate.categoryId
     })
 
@@ -30,7 +30,7 @@ const create = async (dataRealEstate: tCreateRealEstate): Promise<RealEstate> =>
         throw new AppError('Category not found', 404)
     }
 
-    const newAddress = addressRepo.create({
+    const newAddress: Address = addressRepo.create({
         ...dataRealEstate.address
     })
 

@@ -4,10 +4,10 @@ import { AppDataSource } from '../data-source';
 import { User } from '../entities';
 import { AppError } from '../errors';
 import { iReqUser, tLogin } from '../interfaces';
-import jwt from 'jsonwebtoken'
-import 'dotenv/config'
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
-const create = async (dataLogin: tLogin, reqUser: iReqUser) => {
+const create = async (dataLogin: tLogin, reqUser: iReqUser): Promise<string> => {
 
     const userRepo: Repository<User> = AppDataSource.getRepository(User)
 
@@ -15,12 +15,11 @@ const create = async (dataLogin: tLogin, reqUser: iReqUser) => {
         email: dataLogin.email
     })
 
-    
     if(!user){
         throw new AppError('Invalid credentials', 401)
     }
 
-    const pwdMatch = await compare(dataLogin.password, user.password)
+    const pwdMatch: boolean = await compare(dataLogin.password, user.password)
 
     if(!pwdMatch){
         throw new AppError('Invalid credentials', 401)

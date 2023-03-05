@@ -4,16 +4,16 @@ import { RealEstate, Schedule, User } from '../entities'
 import { AppError } from '../errors'
 import { tCreateSchedule } from '../interfaces'
 
-const create = async (dataSchedule: tCreateSchedule, idUser: number) => {
+const create = async (dataSchedule: tCreateSchedule, idUser: number): Promise<Schedule> => {
 
     const receivedDate: string = dataSchedule.date
     const receivedHour: string = dataSchedule.hour
     const receivedRealEstateId: number = dataSchedule.realEstateId
 
-    const now = new Date(receivedDate)
-    const day = (now.getDay())
+    const now: Date = new Date(receivedDate)
+    const day: number = (now.getDay())
 
-    const hourConvertedNumber = +receivedHour.replace(':', '')
+    const hourConvertedNumber: number = +receivedHour.replace(':', '')
 
     if(hourConvertedNumber < 800 || hourConvertedNumber > 1800){
         throw new AppError('Invalid hour, available times are 8AM to 18PM', 400)
@@ -27,7 +27,7 @@ const create = async (dataSchedule: tCreateSchedule, idUser: number) => {
     const schedulesRepo: Repository<Schedule> = AppDataSource.getRepository(Schedule)
     const userRepo: Repository<User> = AppDataSource.getRepository(User)
 
-    const realEstateExists = await realEstateRepo.findOneBy({
+    const realEstateExists: RealEstate | null = await realEstateRepo.findOneBy({
         id: +dataSchedule.realEstateId
     })
 
@@ -35,7 +35,7 @@ const create = async (dataSchedule: tCreateSchedule, idUser: number) => {
         throw new AppError('RealEstate not found', 404)
     }
 
-    const visitAlreadyExists = await realEstateRepo.createQueryBuilder('realEstate').
+    const visitAlreadyExists: RealEstate | null = await realEstateRepo.createQueryBuilder('realEstate').
     leftJoinAndSelect('realEstate.schedules', 'schedulesFromRealEstate').
     where('schedulesFromRealEstate.realEstateId = :id', {id: receivedRealEstateId}).
     andWhere('schedulesFromRealEstate.date = :date', {date: receivedDate}).
@@ -46,7 +46,7 @@ const create = async (dataSchedule: tCreateSchedule, idUser: number) => {
         throw new AppError('Schedule to this real estate at this date and time already exists', 409)
     }
 
-    const ensureOneVisitSameTime = await schedulesRepo.createQueryBuilder('schedules').
+    const ensureOneVisitSameTime: Schedule | null = await schedulesRepo.createQueryBuilder('schedules').
     where('schedules.userId = :id', {id: idUser}).
     andWhere('schedules.date = :date', {date: receivedDate}).
     andWhere('schedules.hour = :hour', {hour: receivedHour}).
@@ -56,10 +56,10 @@ const create = async (dataSchedule: tCreateSchedule, idUser: number) => {
         throw new AppError('User schedule to this real estate at this date and time already exists', 409)
     }
 
-    const real = await realEstateRepo.findOneBy({id: receivedRealEstateId})
-    const user = await userRepo.findOneBy({id: idUser})
+    const real: RealEstate | null = await realEstateRepo.findOneBy({id: receivedRealEstateId})
+    const user: User | null = await userRepo.findOneBy({id: idUser})
 
-    const newSchedule = schedulesRepo.create({
+    const newSchedule: Schedule = schedulesRepo.create({
         realEstate: real!,
         user: user!,
         date: receivedDate,

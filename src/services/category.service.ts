@@ -1,12 +1,12 @@
-import { Repository } from 'typeorm'
-import { AppDataSource } from '../data-source'
-import { Category } from '../entities'
+import { Repository } from 'typeorm';
+import { AppDataSource } from '../data-source';
+import { Category } from '../entities';
 import { AppError } from '../errors';
 import { tReturnCategory, tCreateCategory } from '../interfaces';
 
 const create = async (newCategory: tCreateCategory): Promise<tReturnCategory> => {
 
-    const categoryReceived = newCategory.name
+    const categoryReceived: string = newCategory.name
 
     const categoryRepo: Repository<Category> = AppDataSource.getRepository(Category)
 

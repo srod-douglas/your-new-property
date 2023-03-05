@@ -2,8 +2,7 @@ import { createUserSchema, createdUserSchema, userReturnSchema, listUserReturnSc
 import { loginSchema } from './login.schemas';
 import { categorySchema, returnCategorySchema, returnRealEstatesList } from './category.schemas';
 import { createRealEstateSchema, returnRealEstateSchema } from './realEstate.schemas';
-import { createScheduleSchema } from './schedule.schemas'
-
+import { createScheduleSchema } from './schedule.schemas';
 
 export  {
     createUserSchema,
@@ -18,4 +17,4 @@ export  {
     createRealEstateSchema,
     returnRealEstateSchema,
     createScheduleSchema
-}
+};

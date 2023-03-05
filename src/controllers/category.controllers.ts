@@ -20,7 +20,7 @@ const read = async (req: Request, res: Response): Promise<Response> => {
 
 const listRealEstates = async (req: Request, res: Response): Promise<Response> => {
 
-    const realEstates: Category | null = await categoryServices.listRealEstateFromId(Number(req.params.id))
+    const realEstates: Category | null = await categoryServices.listRealEstateFromId(+req.params.id)
     
     return res.status(200).json(realEstates)
 
