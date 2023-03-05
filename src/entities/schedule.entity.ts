@@ -16,7 +16,9 @@ export class Schedule {
     @ManyToOne(() => RealEstate)
     realEstate: RealEstate
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, (user) => user.id)
     user: User
+
+    
 
 }

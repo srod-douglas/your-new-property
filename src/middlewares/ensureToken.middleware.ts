@@ -26,7 +26,7 @@ const middleware = async (req: Request, res: Response, next: NextFunction): Prom
                 id: Number(decoded.sub)
             }
 
-            return next()
+        return next()
     })
 }
 

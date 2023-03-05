@@ -6,22 +6,7 @@ import { AppError } from '../errors';
 
 const middleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 
-    if(req.originalUrl == '/categories/:id/realEstate'){
-
-        const idRoute = Number(req.params.id)
-        const repoCategory: Repository<Category> = AppDataSource.getRepository(Category)
-        
-        const idFound = await repoCategory.findOneBy({
-            id: idRoute
-        })
-    
-        if(!idFound){
-            throw new AppError('Category not found', 404)
-        }
-        return next()
-    }
-
-    if(req.originalUrl = '/categories/:id/realEstate'){
+    if(req.originalUrl == `/categories/${req.params.id}/realEstate`/*  || req.originalUrl == '/:id/realEstate' */){
 
         const idRoute = Number(req.params.id)
         const repoCategory: Repository<Category> = AppDataSource.getRepository(Category)

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../errors';
 
-const middleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+const middleware = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
 
     const idUserUpdate: number = Number(req.params.id)
 
@@ -19,6 +19,7 @@ const middleware = async (req: Request, res: Response, next: NextFunction): Prom
     if(!req.user.admin){
         throw new AppError('Insufficient permission', 403)
     }
+
 
     return next()
 }

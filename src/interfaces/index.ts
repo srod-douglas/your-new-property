@@ -2,6 +2,7 @@ import { tCreateUser, tCreatedUser, tUserReturn, iReqUser } from './user.interfa
 import { tLogin } from './login.interfaces';
 import { tCreateCategory, tReturnCategory } from './category.interfaces';
 import { tCreateRealEstate, tReturnRealEstate } from './realEstate.interface'
+import { tCreateSchedule } from './schedule.interfaces';
 
 export {
     tCreateUser,
@@ -12,5 +13,6 @@ export {
     tCreateCategory,
     tReturnCategory,
     tCreateRealEstate,
-    tReturnRealEstate
+    tReturnRealEstate,
+    tCreateSchedule
 }

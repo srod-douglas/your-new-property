@@ -17,13 +17,17 @@ const create = async (dataLogin: tLogin, reqUser: iReqUser) => {
 
     
     if(!user){
-        throw new AppError('Wrong email or password', 401)
+        throw new AppError('Invalid credentials', 401)
     }
 
     const pwdMatch = await compare(dataLogin.password, user.password)
 
     if(!pwdMatch){
-        throw new AppError('Wrong email or password', 401)
+        throw new AppError('Invalid credentials', 401)
+    }
+
+    if(user.deletedAt){
+        throw new AppError('Invalid credentials', 401)
     }
 
     const token: string = jwt.sign(
