@@ -1,5 +1,5 @@
-import { PrimaryGeneratedColumn, Entity, Column, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
-import { Address, Category } from './index';
+import { Entity, Column, OneToOne, JoinColumn, ManyToOne, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Address, Category, Schedule } from './index';
 
 @Entity('real_estate')
 export class RealEstate {
@@ -16,17 +16,20 @@ export class RealEstate {
     @Column({ type: 'integer' })
     size: number
 
-    @Column({ type: 'timestamp' })
-    createdAt: Date
+    @CreateDateColumn({ type: 'date' })
+    createdAt: string
 
-    @Column({ type: 'timestamp' })
-    updatedAt: Date
+    @UpdateDateColumn({ type: 'date' })
+    updatedAt: string
 
     @OneToOne(() => Address)
     @JoinColumn()
     address: Address
 
-    @ManyToOne(() => Category)
+    @OneToMany(() => Schedule, (schedules) => schedules.realEstate)
+    schedules: Schedule[]
+
+    @ManyToOne(() => Category, (categories) => categories.realEstate)
     category: Category
     
 }
