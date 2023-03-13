@@ -1,4 +1,4 @@
-# 🏁 Projeto Final: KImóveis - TypeORM com Relacionamentos
+# 🏁 Projeto Sua Nova Propriedade
 
 Para inciar este projeto, é necessário instalar as dependências, que serão utilizadas nos testes. Portanto utilize o comando abaixo para instalar tais dependências:
 
@@ -20,38 +20,6 @@ npm init -y
 
 # caso use yarn
 yarn init -y
-```
-
-## Dependências dos testes
-
-Para que os testes funcionem corretamente, existem algumas dependências.
-
-* O `app` tem que ser exportado como **default** em **src/app.ts**. Exemplo:
-
-```ts
-export default app
-```
-
-* O `AppDataSource` tem que ser exportado em **src/data-source.ts**. Exemplo:
-
-```ts
-export { AppDataSource }
-
-// ou
-
-export const AppDataSource = new DataSource(dataSourceConfig());
-```
-
-* As Entities **tem que ter os respectivos nomes** e **tem que ter a exportação centralizada** em **entities/index.ts**. Exemplo:
-
-```ts
-import { Address } from './<arquivo>';
-import { Category } from './<arquivo>';
-import { RealEstate } from './<arquivo>';
-import { Schedule } from './<arquivo>';
-import { User } from './<arquivo>';
-
-export { Address, RealEstate, Category, User, Schedule };
 ```
 
 ## Sobre os testes
@@ -123,5 +91,3 @@ yarn test <subpasta>/<arquivo>
 Após rodar um dos comandos aparecerá um log no seu terminal, contendo as informações da execução do teste.
 
 **Observação:** O teste pode demorar alguns segundos para ser finalizado. Quanto maior for o teste, mais tempo será consumido para a execução.
-
-### Agora que já sabe como iniciar o seu projeto e rodar os testes, é hora de colocar a mão no código
